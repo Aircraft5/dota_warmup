@@ -1,4 +1,5 @@
 local Dispatcher = require("dispatcher");
+local BaseStore = require("stores/base");
 
 local DotaWarmupGameMode = class({});
 
@@ -6,10 +7,19 @@ function DotaWarmupGameMode:InitGameMode()
 	print( "Template addon is loaded." );
     -- GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
     
-    self.dispatcher = Dispatcher();
+    -- ToDo: move to constructor
+    local dispatcher = Dispatcher();
 
-    -- dispatcher:Listen(testHandler, self);
-    -- dispatcher:Dispatch(testAction);
+    local baseStore = BaseStore();
+
+    local testAction = {};
+
+    print("testAction");
+    print(testAction);
+
+    baseStore:setDispatcher(dispatcher);
+
+    dispatcher:dispatch(testAction);
 end
 
 -- Evaluate the state of the game
