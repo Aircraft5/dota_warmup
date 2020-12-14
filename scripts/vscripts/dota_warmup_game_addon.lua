@@ -17,8 +17,7 @@ function DotaWarmupGameMode:InitGameMode()
     print("testAction");
     print(testAction);
 
-    baseStore:setDispatcher(dispatcher);
-
+    dispatcher:addStore(baseStore);
     dispatcher:dispatch(testAction);
 end
 
