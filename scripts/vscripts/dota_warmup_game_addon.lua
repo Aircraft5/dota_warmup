@@ -1,5 +1,6 @@
 local Dispatcher = require("dispatcher");
 local BaseStore = require("stores/base");
+local BaseControllerView = require("controllerviews/base");
 
 local DotaWarmupGameMode = class({});
 
@@ -12,10 +13,14 @@ function DotaWarmupGameMode:InitGameMode()
 
     local baseStore = BaseStore();
 
+    local baseControllerView = BaseControllerView();
+
     local testAction = {};
 
     print("testAction");
     print(testAction);
+
+    baseControllerView:setStore(baseStore);
 
     dispatcher:addStore(baseStore);
     dispatcher:dispatch(testAction);

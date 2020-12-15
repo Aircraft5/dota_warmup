@@ -5,8 +5,8 @@ local EventEmitter = class({
   end
 });
 
-function EventEmitter:listenTo(eventName, context, eventHandler)
-  print("EventEmitter:listenTo START");
+function EventEmitter:listen(eventName, context, eventHandler)
+  print("EventEmitter:listen START");
 
   if eventName == nil or type(eventName) ~= "string" then
     print("EventEmitter:Listen Error: eventName is wrong: " .. tostring(eventHandler));
@@ -43,10 +43,10 @@ function EventEmitter:listenTo(eventName, context, eventHandler)
 
   table.insert(eventListeners, listenersAmount + 1, listener);
 
-  print("EventEmitter:listenTo END");
+  print("EventEmitter:listen END");
 end
 
-function EventEmitter:trigger(eventName, arg)
+function EventEmitter:trigger(eventName, ...)
   print("EventEmitter:trigger : " .. eventName .. " START");
     
   if self._listeners[eventName] == nil or #self._listeners[eventName] == 0 then
@@ -57,7 +57,7 @@ function EventEmitter:trigger(eventName, arg)
   local eventListeners = self._listeners[eventName];
 
   for _, listener in ipairs(eventListeners) do
-    listener.handler(listener.context, arg);
+    listener.handler(listener.context, ...);
   end
 
   print("EventEmitter:trigger : " .. eventName .. " END");
